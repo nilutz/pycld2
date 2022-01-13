@@ -65,6 +65,11 @@ if platform.system() == "Windows":
 else:
     extra_compile_args = ["-w", "-O2", "-fPIC"]
 
+if platform.machine() == 'x86_64':
+    extra_compile_args.append('-m64')
+elif platform.machine() == 'aarch64' or platform.machine() == 'arm64':
+    extra_compile_args.append('-march=armv8-a')
+
 module = setuptools.Extension(
     # First arg (name) is the full name of the extension, including
     # any packages - ie. not a filename or pathname, but Python dotted
